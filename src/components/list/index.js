@@ -22,7 +22,7 @@ function List (props) {
   // Handle form add new item
   const onKeyUpAddInput = e => {
     // Press Enter key to submit
-    if (e.which === 13 && value) {
+    if (e.which === 13 && value && value.trim().length > 0) {
         addNewItem({listId: data.id, name: value.trim()});
     }
     // Press ESC key on input to dismiss
@@ -50,17 +50,25 @@ function List (props) {
       moveItem({dropListId, itemId, dragListId})
     }
   }
+
+  const handleUpdateTitleList = () => {
+    const value = titleInputRef.current.value;
+    if (value && value.trim().length > 0) {
+      setShowTitle(false);
+      updateList({...data, name: value})
+    }
+  }
   return (
     <div className={[classes.Item, "todo-item"].join(" ")} ref={drop}>
        <div className={classes.ItemHeader}>
             {showTitle ?(
               <>
               <input className="__input" style={{border: 'none', height: '25px', width: '100%', marginRight: '5px'}} type="text" ref={titleInputRef} defaultValue={data.name} />
-              <span style={{fontSize: '2em'}} className="material-icons __text_btn" onClick={() => {setShowTitle(false);updateList({...data, name: titleInputRef.current.value})}}>save</span>
+              <span style={{fontSize: '2em'}} className="material-icons __text_btn" onClick={() => handleUpdateTitleList()}>save</span>
               </>
             ) : (
               <>
-              <a title="click to edit" className="__text_btn __truncate_text" style={{display: 'block', flexGrow: 1, marginRight: '5px'}} onClick={() => setShowTitle(true)}>{data.name}</a>
+              <a title="click to edit" className="__text_btn __truncate_text" style={{display: 'block', flexGrow: 1, marginRight: '5px', minHeight: '20px'}} onClick={() => setShowTitle(true)}>{data.name}</a>
               <div className={classes.BtnGroup}>
                    <span className="material-icons __text_btn" onClick={() => setShowInput(!showInput)}>playlist_add</span>
                    <span className="material-icons __text_btn" onClick={e => handleRemoveList()}>delete</span>
