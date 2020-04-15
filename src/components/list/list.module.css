@@ -1,0 +1,76 @@
+.Item {
+    flex: 1 0 calc(25% - 20px);
+    width: calc(25% - 20px);
+    max-width: calc(25% - 20px);
+    overflow: hidden;
+    box-shadow: 1px 1px 10px 5px #8080806e;
+    margin-top: 0;
+    margin-left: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+
+.ItemHeader {
+    color: white;
+    height: 30px;
+    display: flex;
+    padding: 10px;
+    font-size: 1.1rem;
+    background: #366B95;
+    align-items: center;
+    font-weight: 400;
+    line-height: 30px;
+    /* text-transform: capitalize; */
+    justify-content: space-between;
+}
+
+.ItemBody {
+    width: 100%;
+    height: calc(150px + 10vmin);
+    overflow: auto;
+    background-color: white;
+}
+
+.BtnGroup {
+    display: flex;
+    align-items: center;
+}
+
+.InputItem {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid 2px gray;
+    padding: 5px;
+}
+
+/* @media (max-width: 1199.98px) { 
+    .Item {
+        flex: 1 0 calc(25% - 20px);
+        width: calc(25% - 20px);
+        max-width: calc(25% - 20px);
+    }
+} */
+
+@media (max-width: 991.98px) { 
+    .Item {
+        flex: 1 0 calc(33.333333% - 20px);
+        width: calc(33.333333% - 20px);
+        max-width: calc(33.333333% - 20px);
+    }
+ }
+ @media (max-width: 767.98px) {
+    .Item {
+    flex: 1 0 calc(50% - 20px);
+    width: calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .Item {
+        flex: 1 0 calc(100% - 20px);
+        width: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}

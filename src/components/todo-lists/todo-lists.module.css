@@ -1,0 +1,25 @@
+.ListWrap {
+    margin: 40px 0;
+    flex-grow: 1;
+    flex-direction: column;
+}
+.ListHeader {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ListContent {
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: -20px;
+}
+
+
+@media (max-width: 575.98px) {
+    .ListHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
