@@ -14,7 +14,7 @@ export class Utilities {
     }
 
     static sortByKey (array, key, option = 'asc'){
-      if (!array || (array && array.length == 0)) return [];
+      if (!array || (array && array.length === 0)) return [];
       if (!key) return array;
       return array.sort(function(a, b) {
         var nameA = a[key].toUpperCase();

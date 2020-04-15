@@ -1,5 +1,5 @@
 
-import {saveData, getData} from '../../storage';
+import {getData} from '../../storage';
 
 export default window.getOpenItems = function () {
     const data = getData();

@@ -10,7 +10,6 @@ const style = {
 }
 
 function App(props) {
-  const {classes} = props;
   useEffect(() => {
     //Declare window.getOpenItems() function
     getOpenItems();

@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import { useDrop } from 'react-dnd'
-import {status, itemType} from '../../common/constant'
+import {itemType} from '../../common/constant'
 import Item from '../item'
 import classes from './list.module.css';
 
@@ -13,7 +13,7 @@ function List (props) {
   // Enabled can receive drop when an element dragging
   const [{ isActive }, drop] = useDrop({
     accept: itemType.BOX,
-    drop: () => ({listId: data.id}),
+    drop: () => ({listId: data && data.id}),
     collect: (monitor) => ({
       isActive: monitor.canDrop() && monitor.isOver(),
     }),
@@ -22,6 +22,7 @@ function List (props) {
   // Handle form add new item
   const onKeyUpAddInput = e => {
     // Press Enter key to submit
+    if (!data || (data && !data.id)) return;
     if (e.which === 13 && value && value.trim().length > 0) {
         addNewItem({listId: data.id, name: value.trim()});
     }
@@ -63,12 +64,12 @@ function List (props) {
        <div className={classes.ItemHeader}>
             {showTitle ?(
               <>
-              <input className="__input" style={{border: 'none', height: '25px', width: '100%', marginRight: '5px'}} type="text" ref={titleInputRef} defaultValue={data.name} />
+              <input className="__input" style={{border: 'none', height: '25px', width: '100%', marginRight: '5px'}} type="text" ref={titleInputRef} defaultValue={data && data.name} />
               <span style={{fontSize: '2em'}} className="material-icons __text_btn" onClick={() => handleUpdateTitleList()}>save</span>
               </>
             ) : (
               <>
-              <a title="click to edit" className="__text_btn __truncate_text" style={{display: 'block', flexGrow: 1, marginRight: '5px', minHeight: '20px'}} onClick={() => setShowTitle(true)}>{data.name}</a>
+              <a title="click to edit" className="__text_btn __truncate_text" style={{display: 'block', flexGrow: 1, marginRight: '5px', minHeight: '20px'}} onClick={() => setShowTitle(true)}>{data && data.name}</a>
               <div className={classes.BtnGroup}>
                    <span className="material-icons __text_btn" onClick={() => setShowInput(!showInput)}>playlist_add</span>
                    <span className="material-icons __text_btn" onClick={e => handleRemoveList()}>delete</span>
@@ -80,12 +81,12 @@ function List (props) {
         <div className={classes.ItemBody}>
         {showInput && (
         <div style={{margin: '10px'}}>
-          <input className={["__input", classes.InputItem].join(" ")} onChange={(e) => setValue(e.target.value)} onKeyUp={(e) => onKeyUpAddInput(e) }/>
+          <input className={["__input add-input", classes.InputItem].join(" ")} onChange={(e) => setValue(e.target.value)} onKeyUp={(e) => onKeyUpAddInput(e) }/>
         </div>
         )}
         
           <ul >
-            {data.openItems && 
+            {data && data.openItems && 
             data.openItems.length > 0 && 
             data.openItems.map((each, index) => (
             <Item key={index} 
